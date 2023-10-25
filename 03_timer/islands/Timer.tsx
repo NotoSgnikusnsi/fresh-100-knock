@@ -1,4 +1,5 @@
 import { useState } from "preact/hooks";
+import ItemPicker from "../components/ItemPicker.tsx";
 
 export default function Timer() {
   const [start, setStart] = useState(false);
@@ -11,6 +12,10 @@ export default function Timer() {
         <h2 class="p-4 flex justify-center text-bold text-xl text-gray-500">
           Fresh Timer
         </h2>
+        <div class="flex">
+          <ItemPicker />
+          <ItemPicker />
+        </div>
         <h1 class="p-2 flex justify-center text-bold text-4xl">00:00:00</h1>
         <div class="p-4 flex justify-center items-center">
           {start
