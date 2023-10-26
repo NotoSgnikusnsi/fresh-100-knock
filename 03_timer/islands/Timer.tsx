@@ -1,22 +1,195 @@
 import { useState } from "preact/hooks";
-import ItemPicker from "../components/ItemPicker.tsx";
+import { useSignal } from "@preact/signals";
+import ItemPickers from "./ItemPickers.tsx";
 
 export default function Timer() {
+  const TIME = {
+    hours: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+    ],
+    mins: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+    ],
+    secs: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+    ],
+  };
   const [start, setStart] = useState(false);
+  const [hours, setHours] = useState(0);
+  const [mins, setMins] = useState(0);
+  const [secs, setSecs] = useState(0);
+
   const handleStartButtonClick = () => {
     setStart(!start);
   };
+  const handleSetHours = (event) => {
+    setHours(event.target.value);
+  };
+  const handleSetMins = (event) => {
+    setMins(event.target.value);
+  };
+  const handleSetSecs = (event) => {
+    setSecs(event.target.value);
+  };
+
   return (
     <div class="rounded shadow-md">
       <div class="p-4">
         <h2 class="p-4 flex justify-center text-bold text-xl text-gray-500">
           Fresh Timer
         </h2>
-        <div class="flex">
-          <ItemPicker />
-          <ItemPicker />
-        </div>
-        <h1 class="p-2 flex justify-center text-bold text-4xl">00:00:00</h1>
+        <ItemPickers
+          time={TIME}
+          handleSetHours={handleSetHours}
+          handleSetMins={handleSetMins}
+          handleSetSecs={handleSetSecs}
+        />
+        <h1 class="p-2 flex justify-center text-bold text-4xl">
+          {String(hours).padStart(2, "0")}:{String(mins).padStart(2,"0",
+          )}:{String(secs).padStart(2, "0")}
+        </h1>
         <div class="p-4 flex justify-center items-center">
           {start
             ? (
