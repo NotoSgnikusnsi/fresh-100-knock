@@ -156,13 +156,13 @@ export default function Timer() {
       59,
     ],
   };
-  const [start, setStart] = useState(false);
+  const [isStart, setIsStart] = useState(false);
   const [hours, setHours] = useState(0);
   const [mins, setMins] = useState(0);
   const [secs, setSecs] = useState(0);
 
   const handleStartButtonClick = () => {
-    setStart(!start);
+    setIsStart(!isStart);
   };
   const handleSetHours = (event) => {
     setHours(event.target.value);
@@ -173,6 +173,27 @@ export default function Timer() {
   const handleSetSecs = (event) => {
     setSecs(event.target.value);
   };
+
+  if(isStart) {
+    if(secs > 0) {
+      setTimeout(() => {
+        setSecs(secs - 1);
+      }, 1000);
+    } else if(mins > 0) {
+      setTimeout(() => {
+        setSecs(59);
+        setMins(mins - 1);
+      }, 1000);
+    } else if(hours > 0) {
+      setTimeout(() => {
+        setSecs(59);
+        setMins(59);
+        setHours(hours - 1);
+      }, 1000);
+    } else {
+      setIsStart(false);
+    }
+  }
 
   return (
     <div class="rounded shadow-md">
@@ -191,7 +212,7 @@ export default function Timer() {
           )}:{String(secs).padStart(2, "0")}
         </h1>
         <div class="p-4 flex justify-center items-center">
-          {start
+          {isStart
             ? (
               <button
                 class="rounded-full border-2 h-12 w-12 bg-white hover:bg-gray-100 text-gray-600"
