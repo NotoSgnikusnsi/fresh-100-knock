@@ -157,6 +157,7 @@ export default function Timer() {
     ],
   };
   const [isStart, setIsStart] = useState(false);
+  const [isBeep, setIsBeep] = useState(false);
   const [hours, setHours] = useState(0);
   const [mins, setMins] = useState(0);
   const [secs, setSecs] = useState(0);
@@ -174,17 +175,33 @@ export default function Timer() {
     setSecs(event.target.value);
   };
 
-  if(isStart) {
-    if(secs > 0) {
+  const makeSound = () => {
+    const ctx = new AudioContext();
+    let oscillator;
+    if (isBeep) return;
+    oscillator = ctx.createOscillator();
+    oscillator.type = "sine"; // sine, square, sawtooth, triangleがある
+    oscillator.frequency.setValueAtTime(440, ctx.currentTime); // 440HzはA4(4番目のラ)
+    oscillator.connect(ctx.destination);
+    oscillator.start();
+    setIsBeep(true);
+    setTimeout(() => {
+      oscillator.stop();
+      setIsBeep(false);
+    }, 2000);
+  };
+
+  if (isStart) {
+    if (secs > 0) {
       setTimeout(() => {
         setSecs(secs - 1);
       }, 1000);
-    } else if(mins > 0) {
+    } else if (mins > 0) {
       setTimeout(() => {
         setSecs(59);
         setMins(mins - 1);
       }, 1000);
-    } else if(hours > 0) {
+    } else if (hours > 0) {
       setTimeout(() => {
         setSecs(59);
         setMins(59);
@@ -192,6 +209,7 @@ export default function Timer() {
       }, 1000);
     } else {
       setIsStart(false);
+      makeSound();
     }
   }
 
@@ -208,7 +226,9 @@ export default function Timer() {
           handleSetSecs={handleSetSecs}
         />
         <h1 class="p-2 flex justify-center text-bold text-4xl">
-          {String(hours).padStart(2, "0")}:{String(mins).padStart(2,"0",
+          {String(hours).padStart(2, "0")}:{String(mins).padStart(
+            2,
+            "0",
           )}:{String(secs).padStart(2, "0")}
         </h1>
         <div class="p-4 flex justify-center items-center">
