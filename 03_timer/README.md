@@ -6,7 +6,7 @@ Started" guide here: https://fresh.deno.dev/docs/getting-started
 ### 機能
 
 - 時間の設定ができる
-  - モーダルウィンドウ
+  - 時間が表示される上の部分に、時間を設定できるプルダウン形式のピッカーを作成する
 - スタート
   - 時間が一秒ずつ減っていく
   - ボタン
