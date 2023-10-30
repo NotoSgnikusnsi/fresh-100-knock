@@ -5,7 +5,7 @@ import CompleteList from "../islands/CompleteList.tsx";
 export default function Home() {
   return (
     <div class="flex justify-center items-center w-screen h-screen">
-      <div class="rounded shadow-lg p-4 bg-[#F4F4F4]">
+      <div class="rounded shadow-lg p-8 bg-[#F4F4F4]">
         <h2 class="font-black text-sm text-gray-500 flex justify-center m-2">
           Fresh To-Do-List
         </h2>
