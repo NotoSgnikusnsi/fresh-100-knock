@@ -216,7 +216,7 @@ export default function Timer() {
   return (
     <div class="rounded shadow-md">
       <div class="p-4">
-        <h2 class="p-4 flex justify-center text-bold text-xl text-gray-500">
+        <h2 class="p-4 flex justify-center font-bold text-xl text-gray-500">
           Fresh Timer
         </h2>
         <ItemPickers
